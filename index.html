@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samay Raina – Still Alive And Unfiltered</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f5c842;--amber:#e8860a;--red:#c0392b;--black:#060606;--deep:#0c0b09;--panel:#111010;--cream:#f0ece0;--muted:#6a6460;--border:rgba(245,200,66,.12);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--black);}::-webkit-scrollbar-thumb{background:var(--gold);}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");opacity:.35;}
+#cur,#cdot{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);border-radius:50%;}
+#cur{width:38px;height:38px;border:1px solid rgba(245,200,66,.45);transition:width .3s cubic-bezier(.23,1,.32,1),height .3s,background .3s;}
+#cdot{width:5px;height:5px;background:var(--gold);}
+#cur.hov{width:58px;height:58px;background:rgba(245,200,66,.08);border-color:var(--gold);}
+#prog{position:fixed;top:0;left:0;height:2px;z-index:2000;background:linear-gradient(90deg,var(--red),var(--gold));box-shadow:0 0 10px var(--gold);transition:width .05s linear;}
+/* NAV */
+nav{position:fixed;top:0;inset-inline:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;background:linear-gradient(to bottom,rgba(6,6,6,.95),transparent);backdrop-filter:blur(8px);}
+.nbrand{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:4px;color:var(--gold);text-shadow:0 0 24px rgba(245,200,66,.4);}
+.nlinks{display:flex;gap:2.4rem;list-style:none;}
+.nlinks a{color:rgba(240,236,224,.55);text-decoration:none;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s;position:relative;padding-bottom:4px;}
+.nlinks a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .35s;}
+.nlinks a:hover{color:var(--gold);}
+.nlinks a:hover::after{width:100%;}
+
+/* ═══ HERO ═══ */
+#hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pl{position:absolute;inset:0;will-change:transform;}
+#plBg{background:radial-gradient(ellipse 80% 60% at 50% 40%,#1a1005 0%,#0c0b09 40%,#060606 100%);}
+#plStars{overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:rgba(245,200,66,.75);animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.9;transform:scale(1.6)}}
+#plCurtains{pointer-events:none;}
+.cl,.cr{position:absolute;top:0;width:22%;height:100%;background:linear-gradient(to right,#1a0303 0%,#2d0808 50%,transparent 100%);}
+.cl{left:0;}.cr{right:0;transform:scaleX(-1);}
+.cl::after,.cr::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to right,transparent 0px,transparent 18px,rgba(0,0,0,.22) 18px,rgba(0,0,0,.22) 20px,transparent 20px,transparent 38px);}
+#plFloor{top:auto;height:38%;background:linear-gradient(to top,#1a1005 0%,#14100a 30%,transparent 100%);}
+#plFloor::before{content:'';position:absolute;top:0;inset-inline:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber),#fff8e8,var(--amber),transparent);box-shadow:0 0 40px 6px var(--amber),0 0 80px 12px rgba(232,134,10,.3);}
+#plFloor::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 28px,rgba(0,0,0,.12) 28px,rgba(0,0,0,.12) 30px);}
+#plSpots{pointer-events:none;}
+.scone{position:absolute;top:-20px;width:0;height:0;border-left:var(--sw) solid transparent;border-right:var(--sw) solid transparent;border-top:98vh solid var(--sc);filter:blur(var(--sb));transform-origin:top center;animation:spotP var(--sd) ease-in-out infinite;}
+@keyframes spotP{0%,100%{opacity:.75}50%{opacity:1}}
+#plSmoke{pointer-events:none;top:auto;height:40%;bottom:30%;}
+.sblob{position:absolute;bottom:0;border-radius:50%;animation:sdrift linear infinite;filter:blur(28px);}
+@keyframes sdrift{0%{opacity:.5;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-220px) scale(3)}}
+#plMics{pointer-events:none;overflow:hidden;}
+.fmic{position:absolute;opacity:0;animation:micF linear infinite;filter:drop-shadow(0 0 8px var(--gold));}
+@keyframes micF{0%{opacity:0;transform:translateY(0) rotate(-5deg)}10%{opacity:.2}90%{opacity:.15}100%{opacity:0;transform:translateY(-150px) rotate(18deg)}}
+/* Hero photo layer */
+#plPhoto{display:flex;align-items:flex-end;justify-content:center;pointer-events:none;}
+.hpwrap{position:relative;width:400px;height:540px;margin-bottom:-18px;filter:drop-shadow(0 0 60px rgba(245,200,66,.2)) drop-shadow(0 40px 80px rgba(0,0,0,.95));}
+.hphoto{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:4px 4px 0 0;filter:saturate(.9) contrast(1.05);}
+.hpwrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(245,200,66,.1) 0%,transparent 40%,transparent 60%,rgba(0,0,0,.25) 100%);border-radius:4px 4px 0 0;}
+.hpshadow{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:80%;height:28px;background:radial-gradient(ellipse,rgba(245,200,66,.35),transparent 70%);filter:blur(10px);animation:shp 2.5s ease-in-out infinite;}
+@keyframes shp{0%,100%{opacity:.6;transform:translateX(-50%) scaleX(1)}50%{opacity:1;transform:translateX(-50%) scaleX(1.1)}}
+/* Fallback SVG when image fails */
+.hsvg{display:none;width:100%;height:100%;}
+/* Hero text */
+.htxt{position:absolute;z-index:10;will-change:transform;}
+.htl{top:50%;left:4rem;transform:translateY(-50%);text-align:left;}
+.heyebrow{font-size:.62rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;animation:fu 1s .3s both;}
+.hname{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);line-height:.88;letter-spacing:-1px;background:linear-gradient(160deg,#fff 0%,var(--cream) 30%,var(--gold) 70%,var(--amber) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 40px rgba(245,200,66,.25));animation:fu 1s .5s both;}
+.hsub{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.9rem,1.8vw,1.35rem);color:var(--muted);margin-top:1rem;line-height:1.6;animation:fu 1s .8s both;}
+.hsub strong{color:var(--gold);font-style:normal;}
+.hcta{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;padding:.9rem 2.4rem;border:1px solid var(--gold);color:var(--gold);font-size:.62rem;letter-spacing:4px;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s;animation:fu 1s 1.1s both;}
+.hcta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .45s cubic-bezier(.7,0,.3,1);}
+.hcta:hover{color:var(--black);}.hcta:hover::before{transform:translateX(0);}
+.hcta span{position:relative;z-index:1;}
+.htr{top:55%;right:4rem;transform:translateY(-50%);text-align:right;animation:fu 1s .9s both;}
+.hsbig{font-family:'Bebas Neue',sans-serif;line-height:.9;}
+.hsbig .n{font-size:clamp(2.5rem,6vw,6.5rem);color:var(--gold);display:block;}
+.hsbig .l{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);display:block;margin-top:.2rem;}
+.hsdiv{width:36px;height:1px;background:rgba(245,200,66,.25);margin:1.2rem 0 1.2rem auto;}
+.scq{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fu 1s 1.6s both;}
+.scq span{font-size:.52rem;letter-spacing:4px;color:var(--muted);}
+.scline{width:1px;height:42px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scl 2s ease-in-out infinite;}
+@keyframes scl{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ ABOUT ═══ */
+#about{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;padding:8rem 4rem;background:linear-gradient(to bottom,var(--black) 0%,#0f0d08 50%,var(--black) 100%);}
+.abgtext{position:absolute;top:0;left:-2%;font-family:'Bebas Neue',sans-serif;font-size:28vw;color:rgba(245,200,66,.022);line-height:1;user-select:none;pointer-events:none;will-change:transform;}
+.abgrid{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;}
+.apcol{position:relative;}
+.apframe{position:relative;width:100%;padding-top:118%;overflow:hidden;}
+.apframe::before{content:'';position:absolute;top:-18px;left:-18px;right:18px;bottom:18px;border:1px solid rgba(245,200,66,.13);z-index:0;pointer-events:none;}
+.apframe::after{content:'SAMAY RAINA';position:absolute;right:-2.2rem;top:40%;writing-mode:vertical-rl;font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:4px;color:rgba(245,200,66,.18);}
+.aphoto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.85) contrast(1.1);will-change:transform;}
+.apov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,6,6,.65) 100%);}
+.apgrade{position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,200,66,.07) 0%,transparent 60%);mix-blend-mode:color-dodge;}
+.apcap{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;display:flex;justify-content:space-between;align-items:flex-end;z-index:2;}
+.apcap .lbl{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,200,66,.55);}
+.apcap .yr{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:rgba(245,200,66,.18);line-height:1;}
+.atcol{position:relative;}
+.aey{font-size:.62rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.ah2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5.5rem);line-height:.92;color:var(--cream);margin-bottom:2rem;}
+.ah2 em{color:var(--gold);font-style:normal;}
+.abody{color:var(--muted);line-height:2;font-size:.82rem;margin-bottom:1.5rem;}
+.statsrow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:2.5rem;border:1px solid var(--border);}
+.scell{padding:1.3rem .8rem;text-align:center;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background .3s;}
+.scell:last-child{border-right:none;}
+.scell:hover{background:rgba(245,200,66,.04);}
+.scell::before{content:'';position:absolute;inset-inline:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;}
+.scell:hover::before{transform:scaleX(1);}
+.snum{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--gold);display:block;line-height:1;}
+.slbl{font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.ticker{overflow:hidden;margin:2.5rem 0;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ticker-in{display:flex;gap:3rem;animation:tickr 18s linear infinite;white-space:nowrap;}
+.ticker-in span{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.ticker-in .dot{color:var(--gold);}
+@keyframes tickr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ PARALLAX SPLIT ═══ */
+#psplit{position:relative;height:68vh;overflow:hidden;display:flex;}
+.spanel{flex:1;position:relative;overflow:hidden;}
+.spanel img{width:100%;height:130%;object-fit:cover;object-position:center;will-change:transform;}
+.spanel::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(6,6,6,.35) 0%,transparent 55%);}
+.spanel:last-child::after{background:linear-gradient(to left,rgba(6,6,6,.35) 0%,transparent 55%);}
+.sdiv{position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);z-index:2;}
+.slabel{position:absolute;bottom:2rem;font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:rgba(255,255,255,.07);pointer-events:none;letter-spacing:4px;}
+.spanel:first-child .slabel{left:2rem;}
+.spanel:last-child .slabel{right:2rem;}
+
+/* ═══ TOUR ═══ */
+#tour{position:relative;min-height:100vh;padding:8rem 4rem;background:var(--black);overflow:hidden;}
+.tbgw{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bebas Neue',sans-serif;font-size:35vw;color:rgba(245,200,66,.018);pointer-events:none;user-select:none;white-space:nowrap;will-change:transform;}
+.shead{text-align:center;margin-bottom:5rem;}
+.stag{font-size:.6rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,8rem);line-height:.88;color:var(--cream);}
+.tlist{max-width:940px;margin:0 auto;}
+.trow{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:2rem;padding:1.6rem 2rem;border-bottom:1px solid var(--border);position:relative;cursor:pointer;transition:background .3s,padding-left .3s;overflow:hidden;}
+.trow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--red),var(--gold));transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.7,0,.3,1);}
+.trow:hover{background:rgba(245,200,66,.03);padding-left:2.6rem;}
+.trow:hover::before{transform:scaleY(1);}
+.tday{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);line-height:1;text-align:center;}
+.tmo{font-size:.56rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:center;}
+.tinfo h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.3rem;}
+.tinfo p{font-size:.68rem;color:var(--muted);}
+.tbadge{display:inline-block;padding:.18rem .6rem;border-radius:2px;font-size:.52rem;letter-spacing:2px;text-transform:uppercase;margin-left:.5rem;vertical-align:middle;}
+.bred{background:var(--red);}.bgold{background:var(--gold);color:var(--black);}
+.tprice{font-size:.7rem;letter-spacing:2px;color:var(--muted);transition:color .3s;}
+.trow:hover .tprice{color:var(--gold);}
+
+/* ═══ GALLERY ═══ */
+#gallery{position:relative;padding:8rem 0;overflow:hidden;background:var(--deep);}
+.gtwrap{overflow:hidden;margin-bottom:1.3rem;}
+.gtrack{display:flex;gap:1.2rem;animation:gs 28s linear infinite;width:max-content;}
+.gtrack.rev{animation-direction:reverse;}
+@keyframes gs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.gcard{width:290px;height:210px;flex-shrink:0;overflow:hidden;position:relative;border-radius:2px;cursor:pointer;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s;}
+.gcard:hover{transform:scale(1.05) translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.85);z-index:2;}
+.gbg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;transition:transform .6s cubic-bezier(.23,1,.32,1);}
+.gcard:hover .gbg{transform:scale(1.08);}
+.gov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(245,200,66,.06) 100%);opacity:0;transition:opacity .3s;}
+.gcard:hover .gov{opacity:1;}
+.glbl{position:absolute;bottom:.8rem;left:1rem;right:1rem;font-size:.62rem;letter-spacing:1px;color:rgba(255,255,255,.6);}
+
+/* ═══ CINEMATIC SECTION ═══ */
+#cinematic{position:relative;height:78vh;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cbg{position:absolute;inset:0;will-change:transform;}
+.cbg img{width:100%;height:120%;object-fit:cover;object-position:center 20%;filter:saturate(.65) brightness(.45);}
+.cov{position:absolute;inset:0;background:linear-gradient(to right,rgba(6,6,6,.9) 0%,rgba(6,6,6,.25) 40%,rgba(6,6,6,.25) 60%,rgba(6,6,6,.9) 100%);}
+.clbt,.clbb{position:absolute;inset-inline:0;height:10%;background:var(--black);z-index:2;}
+.clbt{top:0;}.clbb{bottom:0;}
+.ctxt{position:relative;z-index:3;text-align:center;max-width:700px;padding:2rem;}
+.cquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.2rem,3vw,2.1rem);line-height:1.55;color:var(--cream);text-shadow:0 2px 20px rgba(0,0,0,.8);}
+.cattr{display:block;margin-top:1.5rem;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);}
+.cline{width:48px;height:1px;background:var(--gold);margin:1rem auto 0;}
+
+/* ═══ CLIPS ═══ */
+#clips{padding:8rem 4rem;background:var(--black);position:relative;}
+.cgrid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.ccard{background:var(--panel);overflow:hidden;border-radius:2px;cursor:pointer;position:relative;border:1px solid var(--border);transition:transform .35s cubic-bezier(.23,1,.32,1),box-shadow .35s,border-color .3s;}
+.ccard:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 32px 60px rgba(0,0,0,.8);border-color:rgba(245,200,66,.28);}
+.cthumb{aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.ctbg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;}
+.cscrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 60%);z-index:1;}
+.cplay{position:absolute;z-index:2;width:52px;height:52px;border-radius:50%;background:rgba(245,200,66,.9);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s;}
+.cplay::after{content:'';width:0;height:0;margin-left:4px;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid var(--black);}
+.ccard:hover .cplay{transform:scale(1.12);background:var(--gold);}
+.cviews{position:absolute;bottom:.7rem;right:.8rem;z-index:2;background:rgba(0,0,0,.8);padding:.2rem .5rem;font-size:.6rem;color:rgba(255,255,255,.65);border-radius:2px;}
+.cinfo{padding:1rem 1.2rem 1.3rem;}
+.cinfo h3{font-size:.8rem;margin-bottom:.4rem;line-height:1.4;}
+.cinfo p{font-size:.66rem;color:var(--muted);}
+
+/* ═══ TESTIMONIALS ═══ */
+#testimonials{min-height:70vh;padding:8rem 4rem;background:linear-gradient(to bottom,var(--black),#0f0d08 50%,var(--black));display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.tdecq{position:absolute;top:0;left:1rem;font-family:'Playfair Display',serif;font-size:40vw;color:rgba(245,200,66,.022);line-height:.8;user-select:none;pointer-events:none;will-change:transform;}
+.tcarousel{max-width:780px;width:100%;text-align:center;position:relative;z-index:2;}
+.tslide{display:none;animation:tfi .6s ease;}
+.tslide.active{display:block;}
+@keyframes tfi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.tstars{color:var(--gold);font-size:1rem;letter-spacing:5px;margin-bottom:1.5rem;}
+.tquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2.5vw,1.62rem);line-height:1.65;color:var(--cream);margin-bottom:2rem;}
+.tauthor{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.tcity{font-size:.6rem;color:var(--muted);margin-top:.3rem;}
+.tdots{display:flex;gap:.6rem;justify-content:center;margin-top:2.5rem;}
+.tdot{width:28px;height:2px;background:rgba(255,255,255,.14);cursor:pointer;transition:background .3s;}
+.tdot.active{background:var(--gold);}
+
+/* ═══ BOOK ═══ */
+#book{min-height:100vh;padding:8rem 4rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--black);}
+.bglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(245,200,66,.05),transparent),radial-gradient(ellipse 30% 30% at 15% 80%,rgba(192,57,43,.04),transparent);}
+.binner{max-width:620px;width:100%;position:relative;z-index:2;}
+.btag{font-size:.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
+.bttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,9rem);line-height:.85;color:var(--cream);margin-bottom:.5rem;}
+.bttl span{color:var(--gold);}
+.bdesc{color:var(--muted);font-size:.82rem;line-height:1.8;margin-bottom:2.5rem;}
+.bform{display:flex;flex-direction:column;gap:1.1rem;}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
+.bfield{display:flex;flex-direction:column;gap:.4rem;}
+.bfield label{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.bfield input,.bfield select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--cream);padding:.85rem 1.1rem;font-family:'Space Mono',monospace;font-size:.78rem;outline:none;border-radius:0;-webkit-appearance:none;transition:border-color .3s,background .3s;}
+.bfield input:focus,.bfield select:focus{border-color:var(--gold);background:rgba(245,200,66,.04);}
+.bfield select option{background:#111;}
+.bbtn{margin-top:.8rem;padding:1.1rem;width:100%;background:var(--gold);color:var(--black);border:none;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:background .3s,transform .2s;position:relative;overflow:hidden;}
+.bbtn::before{content:'';position:absolute;inset:0;background:var(--amber);transform:translateX(-101%);transition:transform .4s cubic-bezier(.7,0,.3,1);}
+.bbtn:hover{transform:translateY(-2px);}.bbtn:hover::before{transform:translateX(0);}
+.bbtn span{position:relative;z-index:1;}
+
+/* FOOTER */
+footer{background:#030303;padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05);}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:3px;}
+.flinks{display:flex;gap:2rem;}
+.flinks a{color:var(--muted);text-decoration:none;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+.flinks a:hover{color:var(--gold);}
+.fcopy{font-size:.58rem;color:var(--muted);}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+.ripple-el{position:fixed;pointer-events:none;z-index:9998;border-radius:50%;border:2px solid var(--gold);transform:translate(-50%,-50%) scale(0);animation:rpl .65s ease-out forwards;}
+@keyframes rpl{to{transform:translate(-50%,-50%) scale(3.5);opacity:0}}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.nlinks{display:none;}.abgrid{grid-template-columns:1fr;}.cgrid{grid-template-columns:1fr;}.brow{grid-template-columns:1fr;}.htr{display:none;}.htl{left:2rem;right:2rem;}footer{flex-direction:column;gap:1.5rem;text-align:center;}#about,#tour,#clips,#book{padding:6rem 2rem;}}
+</style>
+</head>
+<body>
+
+<div id="cur"></div><div id="cdot"></div>
+<div id="prog"></div>
+
+<nav>
+  <div class="nbrand">SR</div>
+  <ul class="nlinks">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#tour">Tour</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#clips">Clips</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section id="hero">
+  <div class="pl" id="plBg" data-sy="0.05"></div>
+  <div class="pl" id="plStars" data-sy="0.12"></div>
+  <div class="pl" id="plCurtains" data-sy="0.15">
+    <div class="cl"></div><div class="cr"></div>
+  </div>
+  <div class="pl" id="plFloor" data-sy="0.28"></div>
+  <div class="pl" id="plSpots" data-sy="0.08">
+    <div class="scone" style="--sw:280px;--sc:rgba(245,200,66,.13);--sb:28px;--sd:3s;left:50%;transform:translateX(-50%)"></div>
+    <div class="scone" style="--sw:150px;--sc:rgba(245,200,66,.055);--sb:40px;--sd:4s;left:22%;transform:rotate(-18deg)"></div>
+    <div class="scone" style="--sw:150px;--sc:rgba(245,200,66,.055);--sb:40px;--sd:4.5s;right:22%;transform:rotate(18deg)"></div>
+  </div>
+  <div class="pl" id="plSmoke" data-sy="0.2"></div>
+  <div class="pl" id="plMics" data-sy="0.18"></div>
+  <!-- REAL SAMAY RAINA PHOTO -->
+  <div class="pl" id="plPhoto" data-sy="0.38">
+    <div class="hpwrap" id="hpwrap">
+      <img class="hphoto" id="heroImg"
+        src="https://brownpant.com/wp-content/uploads/2022/12/Samay-Raina-280x280.webp"
+        alt="Samay Raina – Stand-Up Comedian"
+        onerror="document.getElementById('heroImg').style.display='none';document.getElementById('hsvg').style.display='block'">
+      <!-- Fallback SVG portrait -->
+      <svg id="hsvg" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;width:100%;height:100%;border-radius:4px 4px 0 0;background:#0d0c09">
+        <ellipse cx="160" cy="405" rx="100" ry="15" fill="rgba(245,200,66,.12)"/>
+        <rect x="112" y="195" width="98" height="108" rx="20" fill="#1a1a2e"/>
+        <rect x="146" y="174" width="26" height="24" rx="8" fill="#c8956c"/>
+        <path d="M112 210 Q76 228 70 268 Q66 284 78 288" stroke="#1a1a2e" stroke-width="26" stroke-linecap="round" fill="none"/>
+        <path d="M78 288 Q73 310 83 332" stroke="#c8956c" stroke-width="20" stroke-linecap="round" fill="none"/>
+        <rect x="80" y="330" width="7" height="52" rx="3" fill="#555"/>
+        <ellipse cx="83" cy="325" rx="12" ry="15" fill="#333"/>
+        <ellipse cx="83" cy="317" rx="10" ry="7" fill="#666"/>
+        <path d="M83 382 Q58 395 48 412" stroke="#333" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M210 210 Q246 226 254 258 Q260 276 248 282" stroke="#1a1a2e" stroke-width="26" stroke-linecap="round" fill="none"/>
+        <path d="M248 282 Q258 304 248 322" stroke="#c8956c" stroke-width="20" stroke-linecap="round" fill="none"/>
+        <path d="M248 322 Q254 332 251 342" stroke="#c8956c" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M253 325 Q262 331 262 343" stroke="#c8956c" stroke-width="9" stroke-linecap="round" fill="none"/>
+        <rect x="126" y="298" width="28" height="100" rx="13" fill="#1a1a2e"/>
+        <rect x="166" y="305" width="28" height="93" rx="13" fill="#16213e"/>
+        <ellipse cx="140" cy="398" rx="18" ry="8" fill="#0a0a0a"/>
+        <ellipse cx="180" cy="397" rx="18" ry="8" fill="#0a0a0a"/>
+        <ellipse cx="160" cy="140" rx="54" ry="57" fill="#c8956c"/>
+        <path d="M106 136 Q105 92 128 74 Q143 57 160 55 Q177 57 192 74 Q215 92 214 136 Q210 112 200 100 Q184 82 160 80 Q136 82 120 100 Q110 112 106 136Z" fill="#1a0a00"/>
+        <ellipse cx="108" cy="144" rx="10" ry="13" fill="#b88055"/><ellipse cx="212" cy="144" rx="10" ry="13" fill="#b88055"/>
+        <ellipse cx="108" cy="144" rx="5" ry="7" fill="#c8956c"/><ellipse cx="212" cy="144" rx="5" ry="7" fill="#c8956c"/>
+        <rect x="124" y="133" width="36" height="22" rx="8" fill="none" stroke="#f5c842" stroke-width="2.5"/>
+        <rect x="162" y="133" width="36" height="22" rx="8" fill="none" stroke="#f5c842" stroke-width="2.5"/>
+        <line x1="160" y1="144" x2="162" y2="144" stroke="#f5c842" stroke-width="2.5"/>
+        <line x1="107" y1="144" x2="124" y2="144" stroke="#f5c842" stroke-width="2"/>
+        <line x1="198" y1="144" x2="212" y2="144" stroke="#f5c842" stroke-width="2"/>
+        <ellipse cx="142" cy="145" rx="10" ry="8" fill="white"/><ellipse cx="178" cy="145" rx="10" ry="8" fill="white"/>
+        <ellipse cx="144" cy="146" rx="6" ry="5.5" fill="#1a0a00"/><ellipse cx="180" cy="146" rx="6" ry="5.5" fill="#1a0a00"/>
+        <circle cx="146" cy="144" r="2" fill="white"/><circle cx="182" cy="144" r="2" fill="white"/>
+        <path d="M155 163 Q161 174 167 163" stroke="#a07040" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M138 170 Q155 184 182 170 Q175 177 161 179 Q147 177 138 170Z" fill="#1a0a00"/>
+        <path d="M145 172 Q161 184 177 172 Q168 178 161 180 Q154 178 145 172Z" fill="white"/>
+        <path d="M160 0 L230 420 L90 420Z" fill="rgba(245,200,66,.04)"/>
+        <g transform="translate(146,228) scale(0.45)"><circle cx="15" cy="8" r="7" fill="rgba(245,200,66,.65)"/><rect x="9" y="15" width="12" height="4" rx="1" fill="rgba(245,200,66,.65)"/><path d="M7 28 L23 28 L20 19 L10 19Z" fill="rgba(245,200,66,.65)"/><rect x="5" y="28" width="20" height="4" rx="1" fill="rgba(245,200,66,.65)"/></g>
+      </svg>
+      <div class="hpshadow"></div>
+    </div>
+  </div>
+  <!-- Hero Text Left -->
+  <div class="htxt htl" data-sy="-0.06" id="htxtL">
+    <div class="heyebrow">India's King of Dark Comedy &amp; Chess</div>
+    <div class="hname">SAMAY<br>RAINA</div>
+    <div class="hsub">Stand-Up. Chess Chaos. Unfiltered Truth.<br><strong>Still Alive. Still Unhinged.</strong></div>
+    <a href="#book" class="hcta"><span>🎟 Book Your Seat</span></a>
+  </div>
+  <!-- Hero Stats Right -->
+  <div class="htxt htr" data-sy="-0.1" id="htxtR">
+    <div class="hsbig"><span class="n" data-target="7">0</span><span class="l">M+ YouTube Subs</span></div>
+    <div class="hsdiv"></div>
+    <div class="hsbig"><span class="n" data-target="600">0</span><span class="l">M+ Total Views</span></div>
+    <div class="hsdiv"></div>
+    <div class="hsbig"><span class="n" data-target="200">0</span><span class="l">Live Shows Done</span></div>
+  </div>
+  <div class="scq"><span>SCROLL</span><div class="scline"></div></div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about">
+  <div class="abgtext" id="abgtext">SAMAY</div>
+  <div class="abgrid">
+    <div class="apcol reveal">
+      <div class="apframe">
+        <img class="aphoto" id="aphoto"
+          src="https://brownpant.com/wp-content/uploads/2022/12/Samay-Raina-280x280.webp"
+          alt="Samay Raina"
+          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+        <div class="apov"></div><div class="apgrade"></div>
+        <div class="apcap">
+          <span class="lbl">Comedian · Chess BM · YouTuber</span>
+          <span class="yr">2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="atcol">
+      <div class="ticker">
+        <div class="ticker-in">
+          <span>Comicstaan S2 Winner</span><span class="dot">✦</span>
+          <span>Chess Blunder Master</span><span class="dot">✦</span>
+          <span>India's Got Latent</span><span class="dot">✦</span>
+          <span>Still Alive &amp; Unfiltered 2025</span><span class="dot">✦</span>
+          <span>Madison Square Garden 2026</span><span class="dot">✦</span>
+          <span>Comicstaan S2 Winner</span><span class="dot">✦</span>
+          <span>Chess Blunder Master</span><span class="dot">✦</span>
+          <span>India's Got Latent</span><span class="dot">✦</span>
+          <span>Still Alive &amp; Unfiltered 2025</span><span class="dot">✦</span>
+          <span>Madison Square Garden 2026</span><span class="dot">✦</span>
+        </div>
+      </div>
+      <div class="aey reveal d1" style="margin-top:2rem">Born in Jammu. Raised on Dark Humour.</div>
+      <h2 class="ah2 reveal d2">THE KIND<br>OF FUNNY<br><em>THAT HURTS.</em></h2>
+      <p class="abody reveal d3">Samay Raina doesn't write jokes — he excavates your most uncomfortable truths and holds them up to a spotlight. Co-winner of Comicstaan Season 2, Chess BM, and host of India's Got Latent. A Kashmiri Pandit from Jammu who trained as a print engineer, found comedy through open mics, and never looked back.</p>
+      <p class="abody reveal d4">The man who got Magnus Carlsen to blitz on an Indian comedy stream. Who organized the Chess Super League. Who won the $10,000 Botez Bullet Invitational — and donated it all. In 2026, he performed at Madison Square Garden, the youngest Indian comedian to headline that stage.</p>
+      <div class="statsrow reveal">
+        <div class="scell"><span class="snum" data-target="7">0</span><span class="slbl">M+ Subs</span></div>
+        <div class="scell"><span class="snum" data-target="600">0</span><span class="slbl">M+ Views</span></div>
+        <div class="scell"><span class="snum" data-target="200">0</span><span class="slbl">Shows</span></div>
+        <div class="scell"><span class="snum" data-target="15">0</span><span class="slbl">Cities</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PARALLAX SPLIT ══════ -->
+<div id="psplit">
+  <div class="spanel">
+    <img id="splitL"
+      src="https://brownpant.com/wp-content/uploads/2022/12/Samay-Raina-280x280.webp"
+      alt="Samay comedy"
+      onerror="this.style.background='linear-gradient(135deg,#1a1208,#050505)'">
+    <div class="slabel">COMEDY</div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="spanel">
+    <img id="splitR"
+      src="https://brownpant.com/wp-content/uploads/2022/12/Samay-Raina-280x280.webp"
+      alt="Samay chess"
+      onerror="this.style.background='linear-gradient(135deg,#05101a,#050505)'"
+      style="filter:saturate(.3) sepia(.4) brightness(.6) contrast(1.2);object-position:center 30%">
+    <div class="slabel" style="right:2rem">CHESS</div>
+  </div>
+</div>
+
+<!-- ══════ TOUR ══════ -->
+<section id="tour">
+  <div class="tbgw" id="tbgw">TOUR</div>
+  <div class="shead reveal"><div class="stag">On The Road – 2025 · 2026</div><div class="stitle">UPCOMING<br>SHOWS</div></div>
+  <div class="tlist">
+    <div class="trow reveal d1" data-sound><div><div class="tday">15</div><div class="tmo">Aug 2025</div></div><div class="tinfo"><h3>Koramangala Social, Bengaluru <span class="tbadge bred">SOLD OUT</span></h3><p>📍 Bengaluru · Still Alive and Unfiltered Tour Opener · 8:00 PM</p></div><div class="tprice">₹1,499+</div></div>
+    <div class="trow reveal d2" data-sound><div><div class="tday">05</div><div class="tmo">Oct 2025</div></div><div class="tinfo"><h3>Siri Fort Auditorium, Delhi <span class="tbadge bred">SOLD OUT</span></h3><p>📍 New Delhi · Tour Finale India Leg · 7:30 PM</p></div><div class="tprice">₹1,299+</div></div>
+    <div class="trow reveal d3" data-sound><div><div class="tday">06</div><div class="tmo">Feb 2026</div></div><div class="tinfo"><h3>Madison Square Garden, New York 🇺🇸 <span class="tbadge bgold">HISTORIC</span></h3><p>📍 New York City · Global Leg Closing Night · 8:00 PM</p></div><div class="tprice">$49+</div></div>
+    <div class="trow reveal d1" data-sound><div><div class="tday">22</div><div class="tmo">Mar 2026</div></div><div class="tinfo"><h3>Nehru Centre, Mumbai <span class="tbadge bgold">HOT</span></h3><p>📍 Worli, Mumbai · New Material Special · 8:30 PM</p></div><div class="tprice">₹1,799+</div></div>
+    <div class="trow reveal d2" data-sound><div><div class="tday">10</div><div class="tmo">Apr 2026</div></div><div class="tinfo"><h3>Harrington Street Arts, London 🇬🇧</h3><p>📍 London, UK · UK Premiere · 7:00 PM</p></div><div class="tprice">£35+</div></div>
+    <div class="trow reveal d3" data-sound><div><div class="tday">25</div><div class="tmo">May 2026</div></div><div class="tinfo"><h3>Phoenix Marketcity, Hyderabad</h3><p>📍 Hyderabad · Summer Special · 7:30 PM</p></div><div class="tprice">₹999+</div></div>
+  </div>
+</section>
+
+<!-- ══════ GALLERY ══════ -->
+<section id="gallery">
+  <div class="shead reveal" style="padding:0 4rem"><div class="stag">Moments From The Stage</div><div class="stitle">LIVE GALLERY</div></div>
+  <div class="gtwrap" style="margin-top:3rem"><div class="gtrack" id="gR1"></div></div>
+  <div class="gtwrap"><div class="gtrack rev" id="gR2"></div></div>
+</section>
+
+<!-- ══════ CINEMATIC QUOTE ══════ -->
+<section id="cinematic">
+  <div class="cbg" id="cbg">
+    <img src="https://brownpant.com/wp-content/uploads/2022/12/Samay-Raina-280x280.webp"
+      alt="Samay Raina" onerror="this.parentNode.style.background='#0a0805'">
+  </div>
+  <div class="cov"></div>
+  <div class="clbt"></div><div class="clbb"></div>
+  <div class="ctxt reveal">
+    <div class="cquote">"I thought it was the need of the hour. I never thought so many people would take to chess, and it all feels so surreal."</div>
+    <span class="cattr">— Samay Raina, on mixing comedy with chess</span>
+    <div class="cline"></div>
+  </div>
+</section>
+
+<!-- ══════ CLIPS ══════ -->
+<section id="clips">
+  <div class="shead reveal"><div class="stag">Watch On YouTube</div><div class="stitle">VIRAL CLIPS</div></div>
+  <div class="cgrid">
+    <div class="ccard reveal" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#1a1208,#2d1500)">🎭</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">8.2M views</div></div><div class="cinfo"><h3>"Why I Roast Chess Players" – Live Comedy Special</h3><p>Chess Anarchy Special · 18 min · 2023</p></div></div>
+    <div class="ccard reveal d1" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#050d1a,#080820)">♟️</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">11.4M views</div></div><div class="cinfo"><h3>Magnus vs Samay | SuperPogChamps Final 2025</h3><p>Chess Chaos Tournament · 35 min · Dec 2025</p></div></div>
+    <div class="ccard reveal d2" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#1a0505,#2d0d0d)">🎤</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">5.7M views</div></div><div class="cinfo"><h3>Dark Humour That Hits Too Hard | Full India Tour Special</h3><p>India Tour 2023 · 45 min</p></div></div>
+    <div class="ccard reveal d1" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#0d1a0d,#1a2d1a)">😂</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">3.9M views</div></div><div class="cinfo"><h3>Dating, Depression &amp; Dosa – Stand-Up Comedy</h3><p>Unfiltered Series · 22 min · 2024</p></div></div>
+    <div class="ccard reveal d2" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#151505,#2d2800)">🧠</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">6.1M views</div></div><div class="cinfo"><h3>Overthinking Is A Superpower | Mental Health Comedy</h3><p>Raw &amp; Real Series · 28 min · 2023</p></div></div>
+    <div class="ccard reveal d3" onclick="ripple(event)"><div class="cthumb"><div class="ctbg" style="background:linear-gradient(135deg,#1a0a1a,#2d0a2d)">🌙</div><div class="cscrim"></div><div class="cplay"></div><div class="cviews">4.3M views</div></div><div class="cinfo"><h3>3 AM Thoughts | Late Night Unfiltered Set</h3><p>Midnight Special · 32 min · 2024</p></div></div>
+  </div>
+</section>
+
+<!-- ══════ TESTIMONIALS ══════ -->
+<section id="testimonials">
+  <div class="tdecq" id="tdecq">"</div>
+  <div class="shead reveal" style="margin-bottom:4rem"><div class="stag">What The Crowd Says</div><div class="stitle">REVIEWS</div></div>
+  <div class="tcarousel">
+    <div class="tslide active"><div class="tstars">★★★★★</div><p class="tquote">"He said the exact thing I was thinking but was too scared to say out loud. I laughed, then felt guilty, then laughed again. That's the Samay experience."</p><div class="tauthor">Priya Sharma</div><div class="tcity">Mumbai · Nehru Centre, 2024</div></div>
+    <div class="tslide"><div class="tstars">★★★★★</div><p class="tquote">"Honestly thought I was going to a comedy show. Left questioning my entire life choices. Best ₹1,200 I've ever spent."</p><div class="tauthor">Arjun Mehta</div><div class="tcity">Delhi · Siri Fort, 2023</div></div>
+    <div class="tslide"><div class="tstars">★★★★★</div><p class="tquote">"My face hurt from laughing for 45 straight minutes. He doesn't just perform — he creates a shared experience of beautiful discomfort."</p><div class="tauthor">Riya Nair</div><div class="tcity">Bengaluru · Still Alive &amp; Unfiltered, 2025</div></div>
+    <div class="tslide"><div class="tstars">★★★★★</div><p class="tquote">"Seeing him at MSG was surreal — an Indian comedian headlining that stage. He had the entire crowd in tears. Proud doesn't even cover it."</p><div class="tauthor">Vikram Joshi</div><div class="tcity">Madison Square Garden, NYC 2026</div></div>
+    <div class="tslide"><div class="tstars">★★★★★</div><p class="tquote">"I flew from Chandigarh to Mumbai just for this show. My family thought I was crazy. Samay proved them wrong — absolutely worth every rupee."</p><div class="tauthor">Simran Kaur</div><div class="tcity">Chandigarh → Mumbai Tour, 2024</div></div>
+    <div class="tdots" id="tdots"></div>
+  </div>
+</section>
+
+<!-- ══════ BOOK ══════ -->
+<section id="book">
+  <div class="bglow"></div>
+  <div class="binner reveal">
+    <div class="btag">Lock In Your Spot</div>
+    <div class="bttl">GRAB<br><span>YOUR</span><br>SEAT</div>
+    <p class="bdesc">Secure your spot at the most uncomfortably hilarious show of the year. Limited seats. Unlimited regret if you miss it.</p>
+    <div class="bform">
+      <div class="brow">
+        <div class="bfield"><label>Select City</label><select><option>Mumbai – Nehru Centre (Mar 2026)</option><option>Delhi – Siri Fort Auditorium</option><option>Hyderabad – Phoenix (May 2026)</option><option>London – Harrington Arts (Apr 2026)</option></select></div>
+        <div class="bfield"><label>Ticket Type</label><select><option>General – ₹999</option><option>Premium – ₹1,799</option><option>VIP (Meet &amp; Greet) – ₹4,999</option><option>Group (4+) – ₹799/person</option></select></div>
+      </div>
+      <div class="brow">
+        <div class="bfield"><label>Your Name</label><input type="text" placeholder="Full name"></div>
+        <div class="bfield"><label>Number of Tickets</label><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+      </div>
+      <div class="bfield"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+      <button class="bbtn" id="bbtn"><span>🎟  CONFIRM BOOKING</span></button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">SAMAY RAINA</div>
+  <div class="flinks">
+    <a href="https://www.youtube.com/@SamayRainaOfficial" target="_blank">YouTube</a>
+    <a href="https://www.instagram.com/maisamayhoon" target="_blank">Instagram</a>
+    <a href="https://x.com/rehesamay" target="_blank">Twitter / X</a>
+    <a href="https://www.chess.com/member/samayraina" target="_blank">Chess.com</a>
+  </div>
+  <div class="fcopy">© 2026 Samay Raina. All rights reserved.</div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),cdot=document.getElementById('cdot');
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function lp(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px';cdot.style.left=mx+'px';cdot.style.top=my+'px';requestAnimationFrame(lp);})();
+document.querySelectorAll('a,button,.trow,.gcard,.ccard,.tdot').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('hov'));el.addEventListener('mouseleave',()=>cur.classList.remove('hov'));});
+
+// PROGRESS
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{prog.style.width=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';},{passive:true});
+
+// PARALLAX ENGINE
+const pEls=[];
+document.querySelectorAll('[data-sy]').forEach(el=>pEls.push({el,sy:parseFloat(el.dataset.sy)}));
+let lastY=0;
+function doParallax(){
+  const sy=window.scrollY;
+  if(Math.abs(sy-lastY)<.5)return;
+  lastY=sy;
+  pEls.forEach(({el,sy:s})=>el.style.transform=`translate3d(0,${sy*s}px,0)`);
+  // Split images
+  const sp=document.getElementById('psplit');
+  if(sp){const r=sp.getBoundingClientRect(),p=-(r.top)/(innerHeight+r.height);
+    const l=document.getElementById('splitL'),ri=document.getElementById('splitR');
+    if(l)l.style.transform=`translate3d(0,${-p*50}px,0) scale(1.18)`;
+    if(ri)ri.style.transform=`translate3d(0,${p*50}px,0) scale(1.18)`;}
+  // Cinematic
+  const cb=document.getElementById('cbg');
+  if(cb){const r=cb.getBoundingClientRect(),p=-(r.top)/(innerHeight+r.height);cb.style.transform=`translate3d(0,${p*70}px,0)`;}
+  // About bg text
+  const ab=document.getElementById('abgtext');
+  if(ab){const r=document.getElementById('about').getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);ab.style.transform=`translate3d(0,${p*-55}px,0)`;}
+  // Tour bg word
+  const tw=document.getElementById('tbgw');
+  if(tw){const r=document.getElementById('tour').getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);tw.style.transform=`translate(-50%,calc(-50% + ${p*28}px))`;}
+  // Testimonial deco
+  const td=document.getElementById('tdecq');
+  if(td){const r=document.getElementById('testimonials').getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);td.style.transform=`translate3d(0,${p*-35}px,0)`;}
+  // About photo parallax
+  const ap=document.getElementById('aphoto');
+  if(ap){const r=document.getElementById('about').getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));ap.style.transform=`scale(${1.06+p*.07}) translateY(${p*-24}px)`;}
+}
+window.addEventListener('scroll',doParallax,{passive:true});
+doParallax();
+
+// MOUSE PARALLAX (hero layers)
+document.addEventListener('mousemove',e=>{
+  const nx=(e.clientX/innerWidth-.5)*2,ny=(e.clientY/innerHeight-.5)*2;
+  const htl=document.getElementById('htxtL'),htr=document.getElementById('htxtR'),hpp=document.getElementById('plPhoto');
+  if(htl)htl.style.transform=`translateY(-50%) translate3d(${nx*18}px,${ny*10}px,0)`;
+  if(htr)htr.style.transform=`translateY(-50%) translate3d(${nx*-20}px,${ny*-10}px,0)`;
+  if(hpp)hpp.style.transform=`translate3d(${nx*-12}px,${ny*-6}px,0)`;
+});
+
+// STARS
+const sb=document.getElementById('plStars');
+for(let i=0;i<42;i++){const s=document.createElement('div');s.className='star';const sz=1+Math.random()*3;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s`;sb.appendChild(s);}
+
+// SMOKE
+const smb=document.getElementById('plSmoke');
+for(let i=0;i<5;i++){const s=document.createElement('div');s.className='sblob';s.style.cssText=`left:${10+Math.random()*80}%;width:${160+Math.random()*180}px;height:${160+Math.random()*180}px;background:radial-gradient(ellipse,rgba(220,180,100,.04),transparent 70%);animation-duration:${7+Math.random()*7}s;animation-delay:${Math.random()*4}s`;smb.appendChild(s);}
+
+// MICS
+const mb=document.getElementById('plMics');
+for(let i=0;i<8;i++){const m=document.createElement('div');m.className='fmic';m.textContent=['🎤','🎙️'][i%2];m.style.cssText=`left:${5+Math.random()*90}%;bottom:${5+Math.random()*45}%;font-size:${1+Math.random()*1.2}rem;animation-duration:${5+Math.random()*7}s;animation-delay:${Math.random()*6}s`;mb.appendChild(m);}
+
+// REVEAL
+const robs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');robs.unobserve(e.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>robs.observe(el));
+
+// COUNTERS
+const cobs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target,tgt=+el.dataset.target;let v=0;const step=Math.ceil(tgt/55);const t=setInterval(()=>{v=Math.min(v+step,tgt);el.textContent=v;if(v>=tgt)clearInterval(t);},22);cobs.unobserve(el);}}),{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cobs.observe(el));
+
+// Hero counter delayed start
+setTimeout(()=>{document.querySelectorAll('.htr [data-target]').forEach(el=>{const tgt=+el.dataset.target;let v=0;const step=Math.ceil(tgt/50);const t=setInterval(()=>{v=Math.min(v+step,tgt);el.textContent=v;if(v>=tgt)clearInterval(t);},28);});},1300);
+
+// WEB AUDIO CROWD
+function cheer(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const len=ctx.sampleRate*.45;const buf=ctx.createBuffer(1,len,ctx.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,.4);const src=ctx.createBufferSource();src.buffer=buf;const f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.setValueAtTime(650,ctx.currentTime);f.frequency.exponentialRampToValueAtTime(2400,ctx.currentTime+.3);f.Q.value=.6;const g=ctx.createGain();g.gain.setValueAtTime(.2,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.45);src.connect(f);f.connect(g);g.connect(ctx.destination);src.start();src.stop(ctx.currentTime+.45);}catch(e){}}
+function spawnRipple(x,y){const r=document.createElement('div');r.className='ripple-el';r.style.cssText=`left:${x}px;top:${y}px;width:44px;height:44px`;document.body.appendChild(r);setTimeout(()=>r.remove(),700);}
+function ripple(e){cheer();spawnRipple(e.clientX,e.clientY);}
+document.querySelectorAll('.trow').forEach(r=>r.addEventListener('mouseenter',e=>{cheer();spawnRipple(e.clientX,e.clientY);}));
+
+// GALLERY
+const gdata=[
+  {e:'🎭',l:'Nehru Centre, Mumbai 2024',bg:'linear-gradient(135deg,#1a1208,#2d1500)'},
+  {e:'♟️',l:'Chess Anarchy Tournament',bg:'linear-gradient(135deg,#050d1a,#0a1530)'},
+  {e:'🎤',l:'Delhi Comedy Show 2023',bg:'linear-gradient(135deg,#0d1a0d,#1a2d1a)'},
+  {e:'😂',l:'Opening Night – Bengaluru',bg:'linear-gradient(135deg,#1a0505,#2d0d0d)'},
+  {e:'🌙',l:'Midnight Set – Mumbai',bg:'linear-gradient(135deg,#0a0514,#160a28)'},
+  {e:'🎪',l:'Still Alive &amp; Unfiltered 2025',bg:'linear-gradient(135deg,#1a1500,#2d2200)'},
+  {e:'🧠',l:'Mental Health Comedy Night',bg:'linear-gradient(135deg,#0d0d1a,#1a1a2d)'},
+  {e:'🔥',l:'Madison Square Garden 2026',bg:'linear-gradient(135deg,#1a0a00,#2d1400)'},
+];
+function buildRow(id,items){const row=document.getElementById(id);[...items,...items].forEach(it=>{const c=document.createElement('div');c.className='gcard';c.innerHTML=`<div class="gbg" style="background:${it.bg}">${it.e}</div><div class="glbl">${it.l}</div><div class="gov"></div>`;c.addEventListener('mouseenter',e=>{cheer();spawnRipple(e.clientX,e.clientY);});row.appendChild(c);});}
+buildRow('gR1',gdata);buildRow('gR2',[...gdata].reverse());
+
+// TESTIMONIALS
+const tsl=document.querySelectorAll('.tslide'),tdb=document.getElementById('tdots');
+let tc=0;
+tsl.forEach((_,i)=>{const d=document.createElement('div');d.className='tdot'+(i===0?' active':'');d.addEventListener('click',()=>gts(i));tdb.appendChild(d);});
+function gts(n){tsl[tc].classList.remove('active');tdb.children[tc].classList.remove('active');tc=n;tsl[tc].classList.add('active');tdb.children[tc].classList.add('active');}
+setInterval(()=>gts((tc+1)%tsl.length),5200);
+
+// BOOK
+document.getElementById('bbtn').addEventListener('click',function(e){cheer();spawnRipple(e.clientX,e.clientY);const sp=this.querySelector('span');sp.textContent='🎉  BOOKED! CHECK YOUR EMAIL';this.style.background='#27ae60';setTimeout(()=>{sp.textContent='🎟  CONFIRM BOOKING';this.style.background='';},3200);});
+
+// FADE IN
+document.body.style.opacity='0';document.body.style.transition='opacity .8s ease';requestAnimationFrame(()=>document.body.style.opacity='1');
+</script>
+</body>
+</html>
